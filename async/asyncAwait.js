@@ -25,3 +25,13 @@ async function getData() {
 }
 
 getData();
+
+// let, const
+// ES6
+// array methods -> map, filter, reduce, sort, find, includes (optional)
+// if else and switch
+// Array & objects
+// template literals
+// spread operator
+// Array and object destructuring
+// Arrow function
