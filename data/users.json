@@ -58,5 +58,17 @@
     "name": "Clementina DuBuque",
     "email": "Rey.Padberg@karina.biz",
     "phone": "024-648-3804"
+  },
+  {
+    "id": 11,
+    "name": "Shyam Bahadur",
+    "email": "shyam@gmail.com",
+    "address": "Kathmandu"
+  },
+  {
+    "id": 12,
+    "name": "Ram Bahadur",
+    "email": "ram@gmail.com",
+    "address": "Butwal"
   }
 ]
