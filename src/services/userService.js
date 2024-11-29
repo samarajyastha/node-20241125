@@ -1,33 +1,25 @@
-import fs from "fs";
+import User from "../models/User.js";
 
-const getAllUsers = () => {
-  const data = fs.readFileSync("./data/users.json", "utf8");
+const getAllUsers = async () => {
+  const users = await User.find();
 
-  const parsedData = JSON.parse(data);
-
-  return parsedData;
+  return users;
 };
 
-const getUserById = (id) => {
-  const data = fs.readFileSync("./data/users.json", "utf8");
-
-  const parsedData = JSON.parse(data);
-
-  const user = parsedData.find((user) => user.id == id);
+const getUserById = async (id) => {
+  const user = await User.findById(id);
 
   return user;
 };
 
-const addUser = (input) => {
-  const data = fs.readFileSync("./data/users.json", "utf8");
+const addUser = async (input) => {
+  const user = await User.create(input);
 
-  const parsedData = JSON.parse(data);
-
-  parsedData.push(input);
-
-  fs.writeFileSync("./data/users.json", JSON.stringify(parsedData));
-
-  return parsedData;
+  return user;
 };
 
-export default { getAllUsers, getUserById, addUser };
+const updateUser = async (id, input) => {
+  return await User.findByIdAndUpdate(id, input);
+};
+
+export default { getAllUsers, getUserById, addUser, updateUser };

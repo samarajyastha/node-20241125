@@ -1,8 +1,14 @@
 import express from "express";
 import usersRoute from "./routes/users.js";
 import bodyParser from "body-parser";
+import connectDB from "./database.js";
+import dotenv from "dotenv";
 
 const app = express();
+
+dotenv.config();
+
+connectDB();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -47,8 +53,10 @@ app.use("/api/users", usersRoute);
 //   res.json(user);
 // });
 
-app.listen(5000, () => {
-  console.log("Server running at port 5000...");
+const PORT = process.env.PORT;
+
+app.listen(PORT, () => {
+  console.log(`Server running at port ${PORT}...`);
 });
 
 // HTTP Methods

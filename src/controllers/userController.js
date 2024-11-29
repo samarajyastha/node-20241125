@@ -1,26 +1,51 @@
 // function getAllUsers() {}
 import userService from "../services/userService.js";
 
-const getAllUsers = (req, res) => {
-  const data = userService.getAllUsers();
+const getAllUsers = async (req, res) => {
+  try {
+    const data = await userService.getAllUsers();
 
-  res.json(data);
+    res.json(data);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
-const getUserById = (req, res) => {
-  const id = req.params.id;
+const getUserById = async (req, res) => {
+  try {
+    const id = req.params.id;
 
-  const data = userService.getUserById(id);
+    const data = await userService.getUserById(id);
 
-  res.json(data);
+    res.json(data);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
-const addUser = (req, res) => {
-  const input = req.body;
+const addUser = async (req, res) => {
+  try {
+    const input = req.body;
 
-  const data = userService.addUser(input);
+    const data = await userService.addUser(input);
 
-  res.json(data);
+    res.json(data);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
 };
 
-export { getAllUsers, getUserById, addUser };
+const updateUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const input = req.body;
+
+    const data = await userService.updateUser(id, input);
+
+    res.json(data);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
+export { getAllUsers, getUserById, addUser, updateUser };
