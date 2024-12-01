@@ -3,6 +3,8 @@ import usersRoute from "./routes/users.js";
 import bodyParser from "body-parser";
 import connectDB from "./database.js";
 import dotenv from "dotenv";
+import logger from "./middlewares/logger.js";
+import authRoute from "./routes/auth.js";
 
 const app = express();
 
@@ -12,6 +14,8 @@ connectDB();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(logger);
 
 // HTTP GET method
 app.get("/", (req, res) => {
@@ -32,6 +36,12 @@ app.get("/contact", (req, res) => {
 });
 
 app.use("/api/users", usersRoute);
+
+/**
+ * Login, Register, Forgot password, Reset password
+ * Auth
+ */
+app.use("/api/auth", authRoute);
 
 // app.get("/api/users", (req, res) => {
 //   const data = fs.readFileSync("./data/users.json", "utf8");

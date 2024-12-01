@@ -27,6 +27,9 @@ const addUser = async (req, res) => {
   try {
     const input = req.body;
 
+    if (!input.email || !input.password)
+      return res.status(422).send("Email or password is required.");
+
     const data = await userService.addUser(input);
 
     res.json(data);
