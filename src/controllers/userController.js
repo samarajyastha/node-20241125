@@ -47,7 +47,7 @@ const updateUser = async (req, res) => {
 
     res.json(data);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(error.statusCode || 500).send(error.message);
   }
 };
 
