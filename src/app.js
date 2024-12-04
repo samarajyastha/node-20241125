@@ -5,6 +5,7 @@ import connectDB from "./database.js";
 import dotenv from "dotenv";
 import logger from "./middlewares/logger.js";
 import authRoute from "./routes/auth.js";
+import productsRoute from "./routes/products.js";
 
 const app = express();
 
@@ -42,6 +43,9 @@ app.use("/api/users", usersRoute);
  * Auth
  */
 app.use("/api/auth", authRoute);
+
+// Products route
+app.use("/api/products", productsRoute);
 
 // app.get("/api/users", (req, res) => {
 //   const data = fs.readFileSync("./data/users.json", "utf8");
