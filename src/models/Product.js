@@ -24,8 +24,14 @@ const productSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  urls: {
+  imageUrls: {
     type: [String],
+  },
+  rating: {
+    type: Number,
+    default: 5,
+    min: 0,
+    max: 5,
   },
 });
 

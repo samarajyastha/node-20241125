@@ -3,6 +3,7 @@ import {
   addProduct,
   deleteProduct,
   getAllProducts,
+  getCategories,
   getProductById,
   updateProduct,
 } from "../controllers/productController.js";
@@ -17,6 +18,13 @@ const router = express.Router();
  * METHOD: GET
  */
 router.get("/", getAllProducts);
+
+/**
+ * Get categories
+ * URL: /api/products/categories
+ * METHOD: GET
+ */
+router.get("/categories", getCategories);
 
 /**
  * Get product by id

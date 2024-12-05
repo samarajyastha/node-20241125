@@ -2,7 +2,7 @@ import productService from "../services/productService.js";
 
 const getAllProducts = async (req, res) => {
   try {
-    const products = await productService.getAllProducts();
+    const products = await productService.getAllProducts(req.query);
 
     res.json(products);
   } catch (error) {
@@ -29,7 +29,7 @@ const addProduct = async (req, res) => {
   const userId = req.user.id;
 
   try {
-    if (data.urls.length > 5) {
+    if (data.urls?.length > 5) {
       return res.status(400).send("Product images cannot be more than 5.");
     }
 
@@ -49,7 +49,7 @@ const updateProduct = async (req, res) => {
   try {
     const product = await productService.getProductById(id);
 
-    if (product.urls.length > 5) {
+    if (product.urls?.length > 5) {
       return res.status(400).send("Product images cannot be more than 5.");
     }
 
@@ -84,10 +84,21 @@ const deleteProduct = async (req, res) => {
   }
 };
 
+const getCategories = async (req, res) => {
+  try {
+    const categories = await productService.getCategories();
+
+    res.json(categories);
+  } catch (error) {
+    res.status(error.statusCode || 500).send(error.message);
+  }
+};
+
 export {
   getAllProducts,
   getProductById,
   addProduct,
   updateProduct,
   deleteProduct,
+  getCategories,
 };
