@@ -1,0 +1,52 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <header class="py-5 bg-blue-500 flex px-10 justify-between">
+        <nav>
+            <ul class="flex items-center">
+                <li>
+                    <a href="/login" class="text-white hover:text-gray-200 px-3">Login</a>
+                </li>
+                <li>
+                    <a href="/home" class="text-white hover:text-gray-200 px-3">Home</a>
+                </li>
+            </ul>
+        </nav>
+
+        {{#if user}}
+        <p class="text-white">Welcome
+            <span class="font-semibold">{{user.name}}</span>
+        </p>
+        {{/if}}
+    </header>
+    <main>
+        <section class="py-5">
+            <div class="container mx-auto">
+                <div class="flex justify-evenly">
+                    <div class="flex h-[svh-10%] items-center">
+                        <img class="w-1/2" src="images/phone.png">
+
+                        <div class="h-[svh-10%] items-center">
+                            <span class="bg-blue-500 rounded-xl text-white px-3 py-1">{{product.category}}</span>
+                            <h1 class="text-5xl pb-5 pt-3">{{product.name}}</h1>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias at obcaecati maxime
+                                harum
+                                voluptates vel tempore rerum nihil doloribus earum.</p>
+                            <h4 class="text-2xl py-3">{{product.brand}}</h4>
+                            <h4 class="text-teal-500 text-xl">${{product.price}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

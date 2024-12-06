@@ -1,0 +1,51 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <header class="py-5 bg-blue-500 flex px-10 justify-between">
+        <nav>
+            <ul class="flex items-center">
+                <li>
+                    <a href="/login" class="text-white hover:text-gray-200 px-3">Login</a>
+                </li>
+                <li>
+                    <a href="/home" class="text-white hover:text-gray-200 px-3">Home</a>
+                </li>
+            </ul>
+        </nav>
+        <a href="/register" class="text-white hover:text-gray-200 px-3">Register</a>
+    </header>
+
+    <main>
+        <section class="py-5">
+            <div class="container">
+                <h1 class="text-center font-semibold text-5xl">Login</h1>
+                <form action="/api/auth/login" method="POST"
+                    class="w-1/2 mx-auto my-10 bg-slate-100 py-10 px-14 shadow">
+                    <div class="py-1">
+                        <label htmlFor="email">Email</label>
+                        <input type="email" id="email" name="email" class="w-full mt-1 py-1 px-2 rounded" />
+                    </div>
+                    <div class="py-1">
+                        <label htmlFor="password">Password</label>
+                        <input type="password" id="password" name="password" class="w-full mt-1 py-1 px-2 rounded" />
+                    </div>
+                    <div class="mt-5 text-center">
+                        <button type="submit"
+                            class="bg-blue-700 text-white rounded px-5 py-1 cursor-pointer flex items-center mx-auto">
+                            Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

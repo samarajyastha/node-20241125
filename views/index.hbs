@@ -1,0 +1,78 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <header class="py-5 bg-blue-500 flex px-10 justify-between">
+        <nav>
+            <ul class="flex items-center">
+                <li>
+                    <a href="/login" class="text-white hover:text-gray-200 px-3">Login</a>
+                </li>
+                <li>
+                    <a href="/home" class="text-white hover:text-gray-200 px-3">Home</a>
+                </li>
+            </ul>
+        </nav>
+
+        {{#if user}}
+        <p class="text-white">Welcome
+            <span class="font-semibold">{{user.name}}</span>
+        </p>
+        {{/if}}
+    </header>
+    <main>
+        <section class="py-5">
+            <div class="container mx-auto">
+                <div class="flex justify-evenly">
+                    <div class="flex h-[svh-10%] items-center">
+                        <h1 class="text-5xl">Welcome to my
+
+                            <p class="text-7xl text-blue-500">Products app</p>
+                        </h1>
+                    </div>
+                    <img class="w-1/2" src="images/phone.png" alt="">
+                </div>
+            </div>
+        </section>
+        <section class="py-5">
+            <div class="container mx-auto">
+                <div class="px-10 mt-12">
+                    <table class="w-full border">
+                        <thead class="bg-gray-700">
+                            <tr>
+                                <th class="border p-1 text-white">Id</th>
+                                <th class="border p-1 text-white">Name</th>
+                                <th class="border p-1 text-white">Brand</th>
+                                <th class="border p-1 text-white">Category</th>
+                                <th class="border p-1 text-white">Price</th>
+                                <th class="border p-1 text-white">Created At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each products}}
+                            <tr>
+                                <td class="border text-center p-1">
+                                    <a href="/products/{{id}}" class="text-blue-500 hover:text-blue-700">{{id}}</a>
+                                </td>
+                                <td class="border text-center p-1">{{name}}</td>
+                                <td class="border text-center p-1">{{brand}}</td>
+                                <td class="border text-center p-1">{{category}}</td>
+                                <td class="border text-center p-1">{{price}}</td>
+                                <td class="border text-center p-1">{{createdAt}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
