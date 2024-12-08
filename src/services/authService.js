@@ -1,3 +1,4 @@
+import ResetPassword from "../models/ResetPassword.js";
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 
@@ -59,7 +60,52 @@ const loginUser = async (input) => {
   };
 };
 
-export default { registerUser, loginUser };
+const forgotPassword = async (email) => {
+  const user = await User.findOne({ email });
+
+  const otp = Math.floor(Math.random() * 1000000) + 1;
+
+  await ResetPassword.create({
+    userId: user._id,
+    token: otp,
+  });
+
+  // Send email to user
+  // {{baseUrl}}/api/auth/reset-password/:userId/?token=<token>
+
+  return { message: "Reset password link has been sent" };
+};
+
+const resetPassword = async (userId, password, token) => {
+  const data = await ResetPassword.findOne({
+    userId,
+    expiresAt: { $gt: Date.now() },
+  });
+
+  if (!data || data.token !== token)
+    throw {
+      statusCode: 400,
+      message: "Invalid token.",
+    };
+
+  if (data.isUsed)
+    throw {
+      statusCode: 400,
+      message: "Token already used.",
+    };
+
+  const hashedPassword = bcrypt.hashSync(password);
+
+  await User.findByIdAndUpdate(userId, {
+    password: hashedPassword,
+  });
+
+  await ResetPassword.findByIdAndUpdate(data._id, { isUsed: true });
+
+  return { message: "Password reset successful." };
+};
+
+export default { registerUser, loginUser, forgotPassword, resetPassword };
 
 // Authentication => Is user valid
 // Authorization => Is valid user allowed to do some tasks

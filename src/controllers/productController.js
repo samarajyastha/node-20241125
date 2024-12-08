@@ -26,7 +26,7 @@ const getProductById = async (req, res) => {
 
 const addProduct = async (req, res) => {
   const data = req.body;
-  const userId = req.user.id;
+  const userId = req?.user.id;
 
   try {
     if (data.urls?.length > 5) {
