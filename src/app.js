@@ -1,15 +1,18 @@
+import dotenv from "dotenv";
 import express from "express";
-import usersRoute from "./routes/users.js";
+import path from "path";
+import url from "url";
+import cors from "cors";
+
+import authMiddleware from "./middlewares/auth.js";
+import authRoute from "./routes/auth.js";
 import bodyParser from "body-parser";
 import connectDB from "./database.js";
-import dotenv from "dotenv";
 import logger from "./middlewares/logger.js";
-import authRoute from "./routes/auth.js";
-import productsRoute from "./routes/products.js";
-import authMiddleware from "./middlewares/auth.js";
+import ordersRoute from "./routes/orders.js";
 import productService from "./services/productService.js";
-import url from "url";
-import path from "path";
+import productsRoute from "./routes/products.js";
+import usersRoute from "./routes/users.js";
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,6 +34,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(logger);
+
+app.use(
+  cors({
+    origin: process.env.APP_URL,
+  })
+);
 
 // HTTP GET method
 app.get("/", (req, res) => {
@@ -60,6 +69,9 @@ app.use("/api/auth", authRoute);
 
 // Products route
 app.use("/api/products", productsRoute);
+
+// Orders route
+app.use("/api/orders", ordersRoute);
 
 // app.get("/api/users", (req, res) => {
 //   const data = fs.readFileSync("./data/users.json", "utf8");
