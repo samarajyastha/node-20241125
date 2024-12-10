@@ -3,6 +3,8 @@ import express from "express";
 import path from "path";
 import url from "url";
 import cors from "cors";
+import multer from "multer";
+import fs from "fs";
 
 import authMiddleware from "./middlewares/auth.js";
 import authRoute from "./routes/auth.js";
@@ -16,6 +18,28 @@ import usersRoute from "./routes/users.js";
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    const uploadDir = "uploads/";
+
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir);
+    }
+
+    cb(null, uploadDir);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now();
+
+    cb(
+      null,
+      `${uniqueSuffix}-${file.originalname}`
+    );
+  },
+});
+
+const upload = multer({ storage: storage });
 
 const app = express();
 
@@ -59,7 +83,7 @@ app.get("/contact", (req, res) => {
   res.send("Contact page");
 });
 
-app.use("/api/users", usersRoute);
+app.use("/api/users", upload.single("image"), usersRoute);
 
 /**
  * Login, Register, Forgot password, Reset password

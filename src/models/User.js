@@ -34,6 +34,7 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  profileImageUrl: String,
 });
 
 export default mongoose.model("User", userSchema);

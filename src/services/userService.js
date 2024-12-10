@@ -28,4 +28,14 @@ const updateUser = async (id, input) => {
   return await User.findByIdAndUpdate(id, input);
 };
 
-export default { getAllUsers, getUserById, addUser, updateUser };
+const updateProfileImage = async (id, profileImageUrl) => {
+  return await User.findByIdAndUpdate(id, { profileImageUrl });
+};
+
+export default {
+  getAllUsers,
+  getUserById,
+  addUser,
+  updateUser,
+  updateProfileImage,
+};

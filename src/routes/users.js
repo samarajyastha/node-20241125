@@ -3,6 +3,7 @@ import {
   addUser,
   getAllUsers,
   getUserById,
+  updateProfileImage,
   updateUser,
 } from "../controllers/userController.js";
 import auth from "../middlewares/auth.js";
@@ -35,5 +36,12 @@ router.post("/", auth, addUser);
  * To update a user
  */
 router.put("/:id", [auth, roleBasedAuth("ADMIN")], updateUser);
+
+/**
+ * Route: /api/users/:id/profile-image
+ * Method: PUT
+ * To update a user's profile picture
+ */
+router.put("/:id/profile-image", [auth], updateProfileImage);
 
 export default router;
