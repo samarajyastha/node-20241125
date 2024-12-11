@@ -70,7 +70,7 @@ app.get("/", (req, res) => {
   res.json({
     name: "nodejs-20241125",
     version: "1.0.0",
-    license: "ISC",
+    license: "MIT",
     port: 5000,
   });
 });
